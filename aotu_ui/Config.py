@@ -1,4 +1,6 @@
 # -*- coding: utf8 -*-
+import platform
+
 __author__ = 'MR.wen'
 import yaml
 import os
@@ -21,7 +23,10 @@ def get_yaml_local():
     解析本地yaml
     :return:
     """
-    path = os.path.join('/usr/local/config_aotu_ui.yaml')
+    if platform.system() == "Windows":
+        path = os.path.join('d:\config_aotu_ui.yaml')
+    else:
+        path = os.path.join('/usr/local/config_aotu_ui.yaml')
     f = open(path)
     s = yaml.load(f)
     f.close()

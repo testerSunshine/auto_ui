@@ -122,7 +122,8 @@
                         <td>{{ e.result }}</td>
                         <td>{{ e.phone_name }}</td>
                         <td>{{ e.report_update_time }}</td>
-                        <td>{{ e.screenshots_path }}</td>
+{#                        <td><img src="{{ e.screenshots_path }}" class="avatar" alt="Avatar"></td>#}
+                        <td><img src="/image{{ e.screenshots_path }}" class="avatar" alt="Avatar"></td>
                         <td>{{ e.step }}</td>
                         <td>{{ e.msg }}</td>
                         <td>无</td>
@@ -183,7 +184,7 @@
                         <td>{{ i.result }}</td>
                         <td>{{ i.phone_name }}</td>
                         <td>{{ i.report_update_time }}</td>
-                        <td>{{ i.screenshots_path }}</td>
+                        <td><img src="/image{{ e.screenshots_path }}" class="avatar" alt="Avatar"></td>
                         <td>{{ i.step }}</td>
                         <td>{{ i.msg }}</td>
                         <td>无</td>

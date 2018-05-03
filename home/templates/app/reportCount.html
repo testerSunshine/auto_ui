@@ -1,0 +1,224 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} Typography {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link href="/static/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>测试报告详情</h3>
+        </div>
+
+        <div class="title_right">
+          <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">Go!</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>测试报告 <small>详细的测试报告</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+              <div class="col-md-4 col-lg-4 col-sm-6">
+                  {% for d in reportDetail %}
+                  <b><font size="3">项目:  </font></b> 无忧行-ADNROID-测试报告<br>
+                  <b><font size="3">测试日期:  </font></b> {{ d.case_date}}<br>
+                  <b><font size="3">用例覆盖点:  </font></b> 注册登录、个人中心、首页<br>
+                  <b><font size="3">用例覆盖机型:  </font></b> {{phone}}<br>
+                  <b><font size="3">case总量:  </font></b> {{ d.case_sum }}<br>
+                  <b><font size="3">通过:  </font></b> {{d.case_pass_sum}} <br>
+                  <b><font size="3">失败: </font></b> {{ d.case_fail_sum }} <br>
+                  {% endfor %}
+              </div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+              <canvas id="reportDoughnut"></canvas>
+            <div class="clearfix"></div>
+            </div>
+            </div>
+          </div>
+        </div>
+      {% if reportError %}
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>失败用例数<small>如果有失败的case，则突出显示</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table id="fail-datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>用例ID</th>
+                    <th>用例名称</th>
+                    <th>用例标题</th>
+                    <th>测试结果</th>
+                    <th>机型</th>
+                    <th>运行时间</th>
+                    <th>截图</th>
+                    <th>操作步骤</th>
+                    <th>失败原因</th>
+                    <th>log复盘</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for e in reportError%}
+                     <tr>
+                        <td>{{ e.case_id }}</td>
+                        <td>{{ e.case_name }}</td>
+                        <td>{{ e.title }}</td>
+                        <td>{{ e.result }}</td>
+                        <td>{{ e.phone_name }}</td>
+                        <td>{{ e.report_update_time }}</td>
+                        <td>{{ e.step }}</td>
+                        <td>{{ e.screenshots_path }}</td>
+                        <td>{{ e.msg }}</td>
+                        <td>无</td>
+                      </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+        </div>
+    {% endif %}
+      <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>全部用例统计<small>这里统计了每次全部用例运行详情情况</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table id="all-datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>用例ID</th>
+                    <th>用例名称</th>
+                    <th>用例标题</th>
+                    <th>测试结果</th>
+                    <th>机型</th>
+                    <th>运行时间</th>
+                    <th>截图</th>
+                    <th>操作步骤</th>
+                    <th>失败原因</th>
+                    <th>log复盘</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for i in reportInfo %}
+                     <tr>
+                        <td>{{ i.case_id }}</td>
+                        <td>{{ i.case_name }}</td>
+                        <td>{{ i.title }}</td>
+                        <td>{{ i.result }}</td>
+                        <td>{{ i.phone_name }}</td>
+                        <td>{{ i.report_update_time }}</td>
+                        <td>{{ i.screenshots_path }}</td>
+                        <td>{{ i.step }}</td>
+                        <td>{{ i.msg }}</td>
+                        <td>无</td>
+                      </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super }}
+    <!-- Chart.js -->
+  <script src="/static/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="/static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="/static/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+  <script src="/static/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+  <script src="/static/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="/static/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <script src="/static/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+  <script src="/static/vendors/jszip/dist/jszip.min.js"></script>
+  <script src="/static/vendors/pdfmake/build/pdfmake.min.js"></script>
+  <script src="/static/vendors/pdfmake/build/vfs_fonts.js"></script>
+  <script src="/static/vendors/Chart.js/dist/Chart.min.js"></script>
+
+
+{% endblock javascripts %}

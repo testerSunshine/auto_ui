@@ -1,0 +1,168 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} General Elements {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link href="/static/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>测试报告 <small> 测试报告数据统计</small></h3>
+        </div>
+        <div class="title_right">
+          <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>case运行情况 <small>(近7次)</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+{#              <canvas id="mybarChart"></canvas>#}
+              <canvas id="runExport"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>缺陷趋势图<small>(近7次)</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <canvas id="bug_qushi"></canvas>
+            </div>
+          </div>
+        </div>
+      <div class="clearfix"></div>
+
+      <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>所有case运行详细记录<small>统计android、IOS、接口详细测试报表，点击详情查看每次脚本运行详细case数据</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>测试日期</th>
+                    <th>case数</th>
+                    <th>pass</th>
+                    <th>fail</th>
+                    <th>测试耗时</th>
+                    <th>详情</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for r in report %}
+                     <tr>
+                        <td>{{ r.id }}</td>
+                        <td>{{ r.case_date }}</td>
+                        <td>{{ r.case_sum }}</td>
+                        <td>{{ r.case_pass_sum }}</td>
+                        <td>{{ r.case_fail_sum }}</td>
+                        <td>{{ r.case_run_time }}</td>
+                         <td><a href="/report/reportCount/?id={{r.report_uuid}}&pass={{ r.case_pass_sum }}&fail={{ r.case_fail_sum }}">查看详情</a></td>
+                      </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block javascripts %}
+
+  {{ block.super }}
+  <!-- Datatables -->
+  <script src="/static/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="/static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="/static/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+  <script src="/static/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+  <script src="/static/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="/static/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <script src="/static/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+  <script src="/static/vendors/jszip/dist/jszip.min.js"></script>
+  <script src="/static/vendors/pdfmake/build/pdfmake.min.js"></script>
+  <script src="/static/vendors/pdfmake/build/vfs_fonts.js"></script>
+  <script src="/static/vendors/Chart.js/dist/Chart.min.js"></script>
+
+{% endblock javascripts %}
+

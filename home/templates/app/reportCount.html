@@ -184,7 +184,11 @@
                         <td>{{ i.result }}</td>
                         <td>{{ i.phone_name }}</td>
                         <td>{{ i.report_update_time }}</td>
-                        <td><img src="/image{{ e.screenshots_path }}" class="avatar" alt="Avatar"></td>
+                     {%  if i.screenshots_path %}
+                        <td><img src="/image{{ i.screenshots_path }}" class="avatar" alt="Avatar"></td>
+                     {% else %}
+                         <td>无</td>
+                     {% endif %}
                         <td>{{ i.step }}</td>
                         <td>{{ i.msg }}</td>
                         <td>无</td>

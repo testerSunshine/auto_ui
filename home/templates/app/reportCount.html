@@ -9,6 +9,7 @@
   <link href="/static/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
   <link href="/static/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
   <link href="/static/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendors/jq-zoomify/src/zoomify.css" rel="stylesheet">
 {% endblock stylesheets %}
 
 {% block content %}
@@ -123,7 +124,11 @@
                         <td>{{ e.phone_name }}</td>
                         <td>{{ e.report_update_time }}</td>
 {#                        <td><img src="{{ e.screenshots_path }}" class="avatar" alt="Avatar"></td>#}
-                        <td><img src="/image{{ e.screenshots_path }}" class="avatar" alt="Avatar"></td>
+                        <td>
+                            <a href="{{ e.screenshots_path }}" target="_blank">
+                            <img src="{{ e.screenshots_path }}" class="avatar" alt="错误截图">
+                            </a>
+                        </td>
                         <td>{{ e.step }}</td>
                         <td>{{ e.msg }}</td>
                         <td>无</td>
@@ -185,7 +190,7 @@
                         <td>{{ i.phone_name }}</td>
                         <td>{{ i.report_update_time }}</td>
                      {%  if i.screenshots_path %}
-                        <td><img src="/image{{ i.screenshots_path }}" class="avatar" alt="Avatar"></td>
+                        <td><img id="img_zoom" src="/image{{ i.screenshots_path }}" class="avatar" alt="Avatar"></td>
                      {% else %}
                          <td>无</td>
                      {% endif %}
@@ -224,6 +229,7 @@
   <script src="/static/vendors/pdfmake/build/pdfmake.min.js"></script>
   <script src="/static/vendors/pdfmake/build/vfs_fonts.js"></script>
   <script src="/static/vendors/Chart.js/dist/Chart.min.js"></script>
+  <script src="/static/vendors/jq-zoomify/src/zoomify.js"></script>
 
 
 {% endblock javascripts %}

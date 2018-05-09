@@ -38,5 +38,5 @@ class reportInfoListView(ListCreateAPIView):
     """
     测试报告统计信息
     """
-    queryset = ReportInfo.objects.order_by("-id")[:7].reverse()
+    queryset = ReportInfo.objects.order_by("-id")[:7][::-1]
     serializer_class = ReportInfoSerializer

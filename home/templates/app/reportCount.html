@@ -119,11 +119,10 @@
                      <tr>
                         <td>{{ e.case_id }}</td>
                         <td>{{ e.case_name }}</td>
-                        <td>{{ e.title }}</td>
+                        <td>{{ e.precondition }}</td>
                         <td>{{ e.result }}</td>
                         <td>{{ e.phone_name }}</td>
                         <td>{{ e.report_update_time }}</td>
-{#                        <td><img src="{{ e.screenshots_path }}" class="avatar" alt="Avatar"></td>#}
                         <td>
                             <a href="/image{{ e.screenshots_path }}" target="_blank">
                             <img src="/image{{ e.screenshots_path }}" class="avatar" alt="错误截图">
@@ -185,12 +184,16 @@
                      <tr>
                         <td>{{ i.case_id }}</td>
                         <td>{{ i.case_name }}</td>
-                        <td>{{ i.title }}</td>
+                        <td>{{ i.info }}</td>
                         <td>{{ i.result }}</td>
                         <td>{{ i.phone_name }}</td>
                         <td>{{ i.report_update_time }}</td>
                      {%  if i.screenshots_path %}
-                        <td><img id="img_zoom" src="/image{{ i.screenshots_path }}" class="avatar" alt="Avatar"></td>
+                         <td>
+                            <a href="/image{{ i.screenshots_path }}" target="_blank">
+                            <img src="/image{{ i.screenshots_path }}" class="avatar" alt="错误截图">
+                            </a>
+                        </td>
                      {% else %}
                          <td>无</td>
                      {% endif %}

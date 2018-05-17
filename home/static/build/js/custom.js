@@ -5141,6 +5141,8 @@ function init_echarts() {
 }
 
 
+// $('.avatar').zoomify();
+
 $(document).ready(function() {
 
     init_sparklines();

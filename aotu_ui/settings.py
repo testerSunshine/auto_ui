@@ -109,6 +109,23 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
+CACHES = {
+ "default": {
+  "BACKEND": "django_redis.cache.RedisCache",
+  "LOCATION": "redis://127.0.0.1:6379",
+  "OPTIONS": {
+   "CLIENT_CLASS": "django_redis.client.DefaultClient",
+  }
+ }
+}
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
+
+REDIS_TIMEOUT = 7*24*60*60
+CUBES_REDIS_TIMEOUT = 60*2
+NEVER_REDIS_TIMEOUT = 365*24*60*60
+
 LANGUAGE_CODE = 'zh-Hans'
 
 TIME_ZONE = 'PRC'

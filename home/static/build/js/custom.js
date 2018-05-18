@@ -2273,11 +2273,11 @@ function init_charts() {
                         data: datasetsSum
                     }, {
                         label: '# 成功',
-                        backgroundColor: "#03586A",
+                        backgroundColor: "#26B99A",
                         data: datasetsPass
                     }, {
                         label: '# 失败',
-                        backgroundColor: "#26B99A",
+                        backgroundColor: "#f33333",
                         data: datasetsFaild
                     }]
                 },
@@ -2297,17 +2297,19 @@ function init_charts() {
             type: 'line',
             data: {
                 labels: labels,
-                datasets: [{
-                    label: "pass",
-                    backgroundColor: "rgba(38, 185, 154, 0.31)",
-                    borderColor: "rgba(38, 185, 154, 0.7)",
-                    pointBorderColor: "rgba(38, 185, 154, 0.7)",
-                    pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
-                    pointHoverBackgroundColor: "#fff",
-                    pointHoverBorderColor: "rgba(220,220,220,1)",
-                    pointBorderWidth: 1,
-                    data: datasetsPass
-                }, {
+                datasets: [
+                // {
+                //     label: "pass",
+                //     backgroundColor: "rgba(38, 185, 154, 0.31)",
+                //     borderColor: "rgba(38, 185, 154, 0.7)",
+                //     pointBorderColor: "rgba(38, 185, 154, 0.7)",
+                //     pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
+                //     pointHoverBackgroundColor: "#fff",
+                //     pointHoverBorderColor: "rgba(220,220,220,1)",
+                //     pointBorderWidth: 1,
+                //     data: datasetsPass
+                // },
+                    {
                     label: "fail",
                     backgroundColor: "rgba(3, 88, 106, 0.3)",
                     borderColor: "rgba(3, 88, 106, 0.70)",

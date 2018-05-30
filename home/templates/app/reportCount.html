@@ -63,7 +63,7 @@
                   <b><font size="3">项目:  </font></b> 无忧行-ADNROID-测试报告<br>
                   <b><font size="3">测试日期:  </font></b> {{ d.case_date}}<br>
                   <b><font size="3">用例覆盖点:  </font></b> 注册登录、个人中心、首页<br>
-                  <b><font size="3">用例覆盖机型:  </font></b> {{phone}}<br>
+                  <b><font size="3">测试耗时:  </font></b> {{d.case_run_time}}<br>
                   <b><font size="3">case总量:  </font></b> {{ d.case_sum }}<br>
                   <b><font size="3">通过:  </font></b> {{d.case_pass_sum}} <br>
                   <b><font size="3">失败: </font></b> {{ d.case_fail_sum }} <br>
@@ -73,6 +73,50 @@
               <canvas id="reportDoughnut"></canvas>
             <div class="clearfix"></div>
             </div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>机型统计 <small>机型和日志在这里查看</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+              <table class="table">
+                <thead>
+
+                  <tr>
+                    <th>机型</th>
+                    <th>系统日志</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  {% for p in phone %}
+                    <td>{{ p }}</td>
+                    <td>点我下载</td>
+                  {% endfor %}
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
             </div>
           </div>
         </div>

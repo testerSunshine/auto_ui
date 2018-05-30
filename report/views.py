@@ -24,11 +24,11 @@ def reportCount(request):
     reportInfo = Report.objects.filter(report_uuid=uuid)
     reportError = Report.objects.filter(report_uuid=uuid, result="失败")
     reportDetails = ReportInfo.objects.filter(report_uuid=uuid)
-    phone = [r.phone_name for r in reportInfo]
+    phone = set([r.phone_name for r in reportInfo])
     if uuid:
         return render(request, "app/reportCount.html", {"reportInfo": reportInfo,
                                                         "reportError": reportError,
-                                                        "phone": ",".join(set(phone)),
+                                                        "phone": phone,
                                                         "reportDetail": reportDetails})
     else:
         return render(request, "app/page_500.html")

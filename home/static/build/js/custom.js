@@ -2041,6 +2041,26 @@ function init_charts() {
         enabled: false
     };
 
+  //
+  //   var setChart = document.getElementById("setChart");
+  //   new Chart(setChart, {
+  //     type: 'line',
+  //     data: {
+  //         labels: [1,2,3],
+  //         datasets: [
+  //             {
+  //                 label: "步长",
+  //                 backgroundColor: "rgba(3, 88, 106, 0.3)",
+  //                 borderColor: "rgba(3, 88, 106, 0.70)",
+  //                 pointBorderColor: "rgba(3, 88, 106, 0.70)",
+  //                 pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
+  //                 pointHoverBackgroundColor: "#fff",
+  //                 pointHoverBorderColor: "rgba(151,187,205,1)",
+  //                 pointBorderWidth: 1,
+  //                 data: [1,2,3]
+  //             }]
+  //     },
+  // });
 
 
     if ($('#canvas_line').length) {

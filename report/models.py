@@ -21,6 +21,8 @@ class Report(models.Model):
     report_uuid = models.CharField("每次运行唯一md5标识", max_length=256, default=None)
     report_create_time = models.DateTimeField("创建时间", auto_now=False, auto_now_add=True)
     report_update_time = models.DateTimeField("更新时间", auto_now=True, auto_now_add=False)
+    case_step_time = models.TextField("测试步长，json格式", max_length=2048, default=None)
+    # case_performance_info = models.TextField("每步运行的性能情况，内存、cpu、fps", max_length=2048, default=None)
 
 
 class ReportInfo(models.Model):

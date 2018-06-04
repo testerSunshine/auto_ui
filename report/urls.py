@@ -6,6 +6,7 @@ from report import views
 urlpatterns = [
     url(r'reportDetail/$', views.reportDetail, name='reportDetail'),
     url(r'reportCount/$', views.reportCount, name='reportCount'),
+    url(r'reportCount/reportCaseInfo/$', views.reportCaseInfo, name='reportCaseInfo'),
 
     url(r'^reportInfo/$', views.reportInfoListView.as_view()),
 

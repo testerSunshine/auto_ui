@@ -1,0 +1,225 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} 单条测试报告 {% endblock title %}
+
+{% block sidebar_class %}menu_fixed{% endblock sidebar_class %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>测试报告 <small> 单条用例详细报告</small></h3>
+        </div>
+
+        <div class="title_right">
+          <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>{{ reportCaseInfo.title }}</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+
+      <div class="col-md-9 col-sm-9 col-xs-12">
+
+                <ul class="stats-overview">
+                  <li>
+                    <span class="name"> 用例名称 </span>
+                    <span class="value text-success"> {{ reportCaseInfo.case_name }} </span>
+                  </li>
+                  <li>
+                    <span class="name"> 测试结果 </span>
+                      {% if reportCaseInfo.result == "失败" %}
+                    <span class="value text-danger"> {{ reportCaseInfo.result }} </span>
+                      {% else %}
+                    <span class="value text-success"> {{ reportCaseInfo.result }} </span>
+                      {% endif %}
+                  </li>
+                  <li class="hidden-phone">
+                    <span class="name"> 单条用例总耗时 </span>
+                    <span class="value text-success"> {{ caseTimeAll }} ms </span>
+                  </li>
+                </ul>
+                <br />
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>用例耗时趋势图<small>单位为毫秒，报警耗时阈值为3000毫秒</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <canvas id="setChart"></canvas>
+            </div>
+            </div>
+          </div>
+         <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>用例截图<small>用例截图会在这里展示</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+            {% if reportCaseInfo.screenshots_path %}
+              <div class="product-image">
+                <img src="/image{{ reportCaseInfo.screenshots_path }}" alt="错误截图" />
+              </div>
+            {% else %}
+                <div class="report_detail">
+                  <p class="title">用例截图</p>
+                  <p>这个用例没有截图哦</p>
+                </div>
+                <br />
+            {% endif %}
+            </div>
+            </div>
+          </div>
+      </div>
+
+
+              <!-- start project-detail sidebar -->
+              <div class="col-md-3 col-sm-3 col-xs-12">
+
+                <section class="panel">
+
+                  <div class="x_title">
+                    <h2>用例描述</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="panel-body">
+                    <h3 class="green"><i class="fa fa-paint-brush"></i> 详细标题</h3>
+
+                    <p>{{ reportCaseInfo.precondition }}</p>
+                    <br />
+
+                    <div class="project_detail">
+
+                      <p class="title">测试步骤</p>
+                      <p>{{ reportCaseInfo.step }}</p>
+                      <p class="title">检查点</p>
+                      <p>{{ reportCaseInfo.check_step }}</p>
+                    </div>
+
+                    <br />
+                  </div>
+
+                </section>
+
+              </div>
+              <!-- end project-detail sidebar -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super }}
+  <!-- ECharts -->
+  <script src="/static/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="/static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="/static/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+  <script src="/static/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+  <script src="/static/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="/static/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <script src="/static/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+  <script src="/static/vendors/jszip/dist/jszip.min.js"></script>
+  <script src="/static/vendors/pdfmake/build/pdfmake.min.js"></script>
+  <script src="/static/vendors/pdfmake/build/vfs_fonts.js"></script>
+  <script src="/static/vendors/Chart.js/dist/Chart.min.js"></script>
+  <script>
+  var setChart = document.getElementById("setChart");
+  new Chart(setChart, {
+      type: 'line',
+      data: {
+          labels: {{ caseTimeK|safe }},
+          datasets: [
+              {
+                  label: "毫秒",
+                  backgroundColor: "rgba(3, 88, 106, 0.3)",
+                  borderColor: "rgba(3, 88, 106, 0.70)",
+                  pointBorderColor: "rgba(3, 88, 106, 0.70)",
+                  pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
+                  pointHoverBackgroundColor: "#fff",
+                  pointHoverBorderColor: "rgba(151,187,205,1)",
+                  pointBorderWidth: 1,
+                  data: {{ caseTimeV }}
+              }]
+      },
+  });
+  {#init_charts();#}
+  </script>
+{% endblock javascripts %}

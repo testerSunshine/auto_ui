@@ -105,12 +105,12 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
                   {% for p in phone %}
+                  <tr>
                     <td>{{ p }}</td>
                     <td>点我下载</td>
-                  {% endfor %}
                   </tr>
+                  {% endfor %}
                 </tbody>
               </table>
 
@@ -162,7 +162,10 @@
                     {% for e in reportError%}
                      <tr>
                         <td>{{ e.case_id }}</td>
-                        <td>{{ e.case_name }}</td>
+                         <td>
+                             <a href="reportCaseInfo/?id={{ e.report_uuid }}&case_name={{ e.case_name }}">
+                             {{ e.case_name }}</a>
+                         </td>
                         <td>{{ e.precondition }}</td>
                         <td>{{ e.result }}</td>
                         <td>{{ e.phone_name }}</td>
@@ -226,7 +229,10 @@
                     {% for i in reportInfo %}
                      <tr>
                         <td>{{ i.case_id }}</td>
-                        <td>{{ i.case_name }}</td>
+                        <td>
+                             <a href="reportCaseInfo/?id={{ i.report_uuid }}&case_name={{ i.case_name }}">
+                             {{ i.case_name }}</a>
+                         </td>
                         <td>{{ i.precondition }}</td>
                         <td>{{ i.result }}</td>
                         <td>{{ i.phone_name }}</td>

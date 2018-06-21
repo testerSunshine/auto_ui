@@ -118,6 +118,7 @@
                     <th>case数</th>
                     <th>pass</th>
                     <th>fail</th>
+                    <th>系统</th>
                     <th>测试耗时</th>
                     <th>详情</th>
                   </tr>
@@ -130,6 +131,7 @@
                         <td>{{ r.case_sum }}</td>
                         <td>{{ r.case_pass_sum }}</td>
                         <td>{{ r.case_fail_sum }}</td>
+                        <td>{{ r.platform_name }}</td>
                         <td>{{ r.case_run_time }}</td>
                          <td><a href="/report/reportCount/?id={{r.report_uuid}}&pass={{ r.case_pass_sum }}&fail={{ r.case_fail_sum }}">查看详情</a></td>
                       </tr>

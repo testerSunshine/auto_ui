@@ -151,6 +151,7 @@
                     <th>用例标题</th>
                     <th>测试结果</th>
                     <th>机型</th>
+                    <th>系统</th>
                     <th>运行时间</th>
                     <th>截图</th>
                     <th>操作步骤</th>
@@ -169,6 +170,7 @@
                         <td>{{ e.precondition }}</td>
                         <td>{{ e.result }}</td>
                         <td>{{ e.phone_name }}</td>
+                        <td>{{ e.platform_name }}</td>
                         <td>{{ e.report_update_time }}</td>
                         <td>
                             <a href="/image{{ e.screenshots_path }}" target="_blank">
@@ -218,6 +220,7 @@
                     <th>用例标题</th>
                     <th>测试结果</th>
                     <th>机型</th>
+                    <th>系统</th>
                     <th>运行时间</th>
                     <th>截图</th>
                     <th>操作步骤</th>
@@ -236,6 +239,7 @@
                         <td>{{ i.precondition }}</td>
                         <td>{{ i.result }}</td>
                         <td>{{ i.phone_name }}</td>
+                        <td>{{ i.platform_name }}</td>
                         <td>{{ i.report_update_time }}</td>
                      {%  if i.screenshots_path %}
                          <td>

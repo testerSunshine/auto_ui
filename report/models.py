@@ -36,6 +36,7 @@ class ReportInfo(models.Model):
     case_date = models.DateTimeField("测试日期", auto_now=False, auto_now_add=True)
     case_run_time = models.CharField("测试总耗时", max_length=64, default="0")
     platform_name = models.TextField("系统类型", max_length=16, default="android")
+    platform_env = models.TextField("运行环境", max_length=16, default="stage")
     report_uuid = models.CharField("每次运行唯一md5标识", max_length=256, default=None)
     report_info_create_time = models.DateTimeField("创建时间", auto_now=False, auto_now_add=True)
     report_info_update_time = models.DateTimeField("更新时间", auto_now=True, auto_now_add=False)

@@ -46,8 +46,8 @@
 
 #### 功能
 - 所有的自动化统计报表，囊括所有的脚本运行的历史数据和进7天的脚本成功率趋势
-![image](https://github.com/testerSunshine/aotu_ui/blob/master/uml/所有的自动化统计报表.png)
+![image](https://github.com/testerSunshine/aotu_ui/blob/master/uml/所有的自动化统计报表.jpg)
 - 单次自动化统计报表，统计了单词运行脚本的详细信息，分为失败统计和全部统计和日志复盘信息
-![image](https://github.com/testerSunshine/aotu_ui/blob/master/uml/单次自动化统计报表.png)
+![image](https://github.com/testerSunshine/aotu_ui/blob/master/uml/单次自动化统计报表.jpg)
 - 单条自动化统计报表，单条用例的详细信息，包括检查点，执行步骤，
-![image](https://github.com/testerSunshine/aotu_ui/blob/master/uml/单条自动化统计报表.png)
+![image](https://github.com/testerSunshine/aotu_ui/blob/master/uml/单条自动化统计报表.jpg)

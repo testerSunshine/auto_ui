@@ -7,7 +7,7 @@ import json
 from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView
 
-from report.models import ReportInfo, Report
+from report.models import ReportInfo, ReportDetail
 from report.serializers import ReportInfoSerializer
 
 
@@ -24,7 +24,7 @@ def reportCaseInfo(request):
     """
     uuid = request.GET.get("id", None)
     case_name = request.GET.get("case_name", None)
-    caseInfo = Report.objects.filter(report_uuid=uuid,
+    caseInfo = ReportDetail.objects.filter(report_uuid=uuid,
                                      case_name=case_name)
     for c in caseInfo:
         if c.case_step_time:
@@ -44,8 +44,8 @@ def reportCount(request):
     :return:
     """
     uuid = request.GET.get("id", None)
-    reportInfo = Report.objects.filter(report_uuid=uuid)
-    reportError = Report.objects.filter(report_uuid=uuid, result="失败")
+    reportInfo = ReportDetail.objects.filter(report_uuid=uuid)
+    reportError = ReportDetail.objects.filter(report_uuid=uuid, result="失败")
     reportDetails = ReportInfo.objects.filter(report_uuid=uuid)
     phone = set([r.phone_name for r in reportInfo])
     if uuid:

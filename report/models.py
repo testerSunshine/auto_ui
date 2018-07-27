@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-class Report(models.Model):
+class ReportDetail(models.Model):
     """
     测试报告详细记录
     """
@@ -15,7 +15,7 @@ class Report(models.Model):
     step = models.TextField("测试步骤", max_length=2048, default=None)
     phone_name = models.CharField("机型", max_length=64, default=None)
     result = models.ImageField("测试结果", default=0)
-    screenshots_path = models.ImageField("测试图片", upload_to='upload', default=None)
+    screenshots_path = models.ImageField("测试图片，传入图片路径即可", upload_to='upload', default=None)
     msg = models.TextField("失败原因", max_length=1024, default=None)
     case_id = models.CharField("case_id", max_length=64, default=None)
     report_uuid = models.CharField("每次运行唯一md5标识", max_length=256, default=None)

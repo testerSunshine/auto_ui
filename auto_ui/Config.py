@@ -24,9 +24,9 @@ def get_yaml_local():
     :return:
     """
     if platform.system() == "Windows":
-        path = os.path.join('d:\config_aotu_ui.yaml')
+        path = os.path.join('d:\config_auto_ui.yaml')
     else:
-        path = os.path.join('/usr/local/aotuConfig/config_aotu_ui.yaml')
+        path = os.path.join('/usr/local/aotuConfig/config_auto_ui.yaml')
     f = open(path)
     s = yaml.load(f)
     f.close()
